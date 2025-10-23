@@ -1,7 +1,7 @@
 //Uniones discriminadas: cada variante tiene un "status" fijo.
 //El compilador te obliga a manejar los casos
 
-export type SaveSlate =
+export type SaveState =
     | { status: 'idle' }
     | { status: 'saving' }
     | { status: 'error'; message: string }
@@ -9,7 +9,7 @@ export type SaveSlate =
 
 //Type Guards: funciones que verifican el tipo en tiempo de ejecución
 
-export function isSaveError(s: SaveSlate): s is { status: "error"; message: string } {
+export function isSaveError(s: SaveState): s is { status: "error"; message: string } {
     return s.status === "error"
 }
 
@@ -17,3 +17,5 @@ export function isSaveError(s: SaveSlate): s is { status: "error"; message: stri
 export type Result<T> =
     | { ok: true; data: T }
     | { ok: false; error: string }
+
+//Adios error
