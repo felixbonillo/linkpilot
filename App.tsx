@@ -17,17 +17,16 @@ export default function App() {
   })
 
   const addLink = () => {
-    setSave({ status: "saving" }); //Limpiamos errores previos
+    setSave({ status: "idle" }); //Limpiamos errores previos
 
-    // 1- Normalizar
+    // 1- Normalizar + validacion
     const safe = normalizeUrl(url);
-
-    // 2- Validacion simple: Si quedo vacio, consideramos invalido
     if (!safe) {
       setSave({ status: "error", message: "URL invalida. Ej: https://ejemplo.com" });
       return;
     }
 
+    // 2- Solo pasamos a "saving"
     setSave({ status: 'saving' })
 
     // 3- Simular 300ms (mas adelante sera DB/API)
