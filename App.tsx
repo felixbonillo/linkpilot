@@ -54,12 +54,13 @@ export default function App() {
       <Text style={styles.h1}>LinkPilot - MVP</Text>
 
       <TextInput
+        testID="url-input"
         placeholder="Pega un link (https://...)"
         value={url}
         onChangeText={setUrl}
         autoCapitalize="none"
         keyboardType="url"
-        style={styles.input}
+        style={styles.input, save.status === "error" && styles.inputError}
 
       />
       <Button title={save.status === 'saving' ? 'Guardando...' : 'Guardar'} onPress={addLink} />
