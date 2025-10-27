@@ -1,11 +1,18 @@
 {
-  "extends": "./node_modules/expo/tsconfig.base.json",
   "compilerOptions": {
+    "target": "es2019",
+    "module": "esnext",
+    "lib": ["es2019", "dom"],
     "types": ["jest"],
     "strict": true,
     "noImplicitAny": true,
     "exactOptionalPropertyTypes": true,
     "esModuleInterop": true,
-    "skipLibCheck": true
-  }
+    "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "jsx": "react-native"
+  },
+  "include": ["./src", "./**/*.ts", "./**/*.tsx"],
+  "exclude": ["node_modules"]
 }
