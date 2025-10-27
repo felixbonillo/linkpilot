@@ -66,7 +66,7 @@ export default function App() {
       <Button title={save.status === 'saving' ? 'Guardando...' : 'Guardar'} onPress={addLink} />
 
       {save.status === 'error' && (
-        <Text style={styles.error}> {save.message} </Text>
+        <Text testID="url-error" style={styles.error}>{save.message}</Text>
       )}
 
       <FlatList
@@ -120,4 +120,5 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: "#444444",
   },
+  inputError: { borderColor: "#ff4d4f", shadowColor: "#ff4d4f"}
 });
