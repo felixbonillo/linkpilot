@@ -17,17 +17,16 @@ export default function App() {
   })
 
   const addLink = () => {
-    setSave({ status: "saving" }); //Limpiamos errores previos
+    setSave({ status: "idle" }); //Limpiamos errores previos
 
-    // 1- Normalizar
+    // 1- Normalizar + validacion
     const safe = normalizeUrl(url);
-
-    // 2- Validacion simple: Si quedo vacio, consideramos invalido
     if (!safe) {
       setSave({ status: "error", message: "URL invalida. Ej: https://ejemplo.com" });
       return;
     }
 
+    // 2- Solo pasamos a "saving"
     setSave({ status: 'saving' })
 
     // 3- Simular 300ms (mas adelante sera DB/API)
@@ -55,18 +54,19 @@ export default function App() {
       <Text style={styles.h1}>LinkPilot - MVP</Text>
 
       <TextInput
+        testID="url-input"
         placeholder="Pega un link (https://...)"
         value={url}
         onChangeText={setUrl}
         autoCapitalize="none"
         keyboardType="url"
-        style={styles.input}
+        style={styles.input, save.status === "error" && styles.inputError}
 
       />
       <Button title={save.status === 'saving' ? 'Guardando...' : 'Guardar'} onPress={addLink} />
 
       {save.status === 'error' && (
-        <Text style={styles.error}> {save.message} </Text>
+        <Text testID="url-error" style={styles.error}>{save.message}</Text>
       )}
 
       <FlatList
@@ -120,4 +120,5 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: "#444444",
   },
+  inputError: { borderColor: "#ff4d4f", shadowColor: "#ff4d4f"}
 });
